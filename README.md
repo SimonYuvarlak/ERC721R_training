@@ -1,7 +1,63 @@
 # ERC721R_training
 This is the explanation of the ERC721R developed by exo-digital-lab
 
+# This is an example of how to implement ERC721R standart to your code
+```solidity
+// SPDX-License-Identifier: MIT
 
+pragma solidity >=0.8.0;
+
+import "./Ownable.sol";
+
+contract Refundable is Ownable {
+    uint256 public constant refundPeriod = 45 days; //Period to refund the token
+    uint256 public refundEndTime; //Deadline of refunding
+    address public refundAddress; //Address where will be the nft going to be refunded
+
+    constructor() Refundable("ERC721RExample", "ERC721R") {
+        refundAddress = msg.sender; //Refund address is initialized as the intantiator address
+        toggleRefundCountdown();
+    }
+
+    //This function checks whether the refund deadline has been passed or not
+    function isRefundGuaranteeActive() public view returns (bool) {
+        return (block.timestamp <= refundEndTime); //block.timestamp returns the date of the creation and compares it with the refundtime
+    }
+
+    //Refund time end getter
+    function getRefundGuaranteeEndTime() public view returns (uint256) {
+        return refundEndTime;
+    }
+
+    //This function can only be called from outside of the contract
+    function refund(uint256[] calldata tokenIds) external {
+        require(isRefundGuaranteeActive(), "Refund expired"); //Check whether the user can still refund the nft
+
+        //This loop checks all the ids minted on the contract
+        //If there is a token of the user, who is the one who called function, the nft is returned to the refund address which is the initator of the contract
+        for (uint256 i = 0; i < tokenIds.length; i++) {
+            uint256 tokenId = tokenIds[i]; //Gets the token id from the array of nfts to compare with the function caller (msg.sender) given id number
+            require(msg.sender == ownerOf(tokenId), "Not token owner"); //Checks if the msg.sender has the nft
+            transferFrom(msg.sender, refundAddress, tokenId); //Refunds the nft to the contract owner
+        }
+
+        uint256 refundAmount = tokenIds.length * mintPrice; //Generates the price
+        Address.sendValue(payable(msg.sender), refundAmount); //Returns the price of the nft (gas fee has lost)
+    }
+
+    //Starts the refund countdown by adding the days to the block.timestamp which is the -new Date()- in js
+    //Only callable by the owner of the contract
+    function toggleRefundCountdown() public onlyOwner {
+        refundEndTime = block.timestamp + refundPeriod;
+    }
+
+    //Setter for the refund address and is only callable by the owner of the contract
+    function setRefundAddress(address _refundAddress) external onlyOwner {
+        refundAddress = _refundAddress;
+    }
+
+}
+```
 
 # This is an example ERC721R contract
 
