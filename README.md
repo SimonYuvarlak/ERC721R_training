@@ -1,6 +1,10 @@
 # ERC721R_training
 This is the explanation of the ERC721R developed by exo-digital-lab
 
+
+
+# This is an example ERC721R contract
+
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
