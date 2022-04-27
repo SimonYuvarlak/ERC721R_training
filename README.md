@@ -1,6 +1,81 @@
 # ERC721R_training
 This is the explanation of the ERC721R developed by exo-digital-lab
 
+# Some important Concepts to know to understand the code
+// SPDX-License-Identifier: MIT
+This line above is for the license.
+
+```solidity
+   pragma solidity >=0.8.0;
+```
+The line above tells Ethereum Virtual Machine (EVM) compiler to which version to run.
+Since the code on the blockchain cannot be updated but the compile gets updated, this line becomes crucial.
+
+In solidity, we use function modifiers to add a condition to the function.
+Some examples are:
+
+```solidity
+payable
+onlyOwner
+```
+
+Here payable enables function to transfer token.
+Ownable is an example of a custom modifier. Ownable contract is developed by openzeppelin and used very widely.
+This onlyOwner comes from the Ownable contract and it restricts the usage of the function to the contract owner.
+
+
+Function types are also important in Solidity and they are similar to the other programming languages with a few additions.
+
+```solidity
+public
+internal
+external
+private
+```
+
+External functions are part of the contract interface, which means they can be called from other contracts and via transactions. An external function f cannot be called internally (i.e. f()does not work, but this.f() works). External functions are sometimes more efficient when they receive large arrays of data.
+
+Public functions are part of the contract interface and can be either called internally or via messages. For public state variables, an automatic getter function is generated.
+
+Internal functions and state variables can only be accessed internally (i.e. from within the current contract or contracts deriving from it), without using this.
+
+Private functions and state variables are only visible for the contract they are defined in and not in derived contracts.
+(Information about function types has taken from https://medium.com/@yangnana11/solidity-function-types-4ad4e5de6d56).
+
+In Solidity we have uint data type which represent the unsigned integer which can only be positive.
+
+Also there are different types of uint where we can declare the bytes of the unsigned integer.
+
+```solidity
+uint8
+//We can increment in between with steps of 8
+uint256
+```
+If we use uint it means uint256 by default.
+
+address is another type that in Solidity that is different from many other programming languages.
+
+```solidity
+address ownerAdress;
+```
+
+msg.sender comes with every function in Solidity.
+Every function is called from either a person or a smart contract. 
+In either case, we have an address that executes the code which can be usable with msg.sender
+
+```solidity
+address owner = msg.sender;
+```
+
+In Solidity, we have require function that checks the conditions inside and if it false, it stops the execution.
+```solidity
+require(msg.sender == ownerAddress, "You are not the owner");
+```
+Here we check if the address which executes the function is the owner of the contract.
+If not we print a message saying, You are not the owner, and stop the execution.
+
+
+
 # This is an example of how to implement ERC721R standart to your code
 ```solidity
 // SPDX-License-Identifier: MIT
