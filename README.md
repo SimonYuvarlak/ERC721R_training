@@ -2,7 +2,9 @@
 This is the explanation of the ERC721R developed by exo-digital-lab
 
 # Some important Concepts to know to understand the code
+```solidity
 // SPDX-License-Identifier: MIT
+```
 This line above is for the license.
 
 ```solidity
