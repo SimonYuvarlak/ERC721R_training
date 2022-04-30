@@ -1,3 +1,7 @@
+# About ERC721R
+I am leaving a link to my research on this new standart. 
+https://docs.google.com/document/d/1bKDaCAGMi_DSrOIGoa4T-1-a9xTLTPeaQ7cO1kY0Xvc/edit?usp=sharing
+
 # ERC721R_training
 This is the explanation of the ERC721R developed by exo-digital-lab
 
