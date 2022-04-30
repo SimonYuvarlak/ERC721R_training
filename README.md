@@ -1,5 +1,5 @@
 # About ERC721R
-I am leaving a link to my research on this new standart. 
+I am leaving a link to my research on this new standart.  <br />
 https://docs.google.com/document/d/1bKDaCAGMi_DSrOIGoa4T-1-a9xTLTPeaQ7cO1kY0Xvc/edit?usp=sharing
 
 # ERC721R_training
